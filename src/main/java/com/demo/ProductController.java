@@ -1,0 +1,26 @@
+package com.demo;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/products")
+@CrossOrigin(origins = "*")
+public class ProductController {
+
+    private static final List<Product> PRODUCTS = List.of(
+        new Product(1L, "Laptop Pro 15",       "Electronics",  2499.99),
+        new Product(2L, "Wireless Mouse",       "Electronics",    49.99),
+        new Product(3L, "Standing Desk",        "Furniture",     799.00),
+        new Product(4L, "Ergonomic Chair",      "Furniture",     599.00),
+        new Product(5L, "USB-C Hub",            "Electronics",    89.99),
+        new Product(6L, "Bookshelf 5-tier",     "Furniture",     149.00),
+        new Product(7L, "Mechanical Keyboard",  "Electronics",   129.99),
+        new Product(8L, "Monitor 27\"",         "Electronics",   449.00)
+    );
+
+    @GetMapping
+    public List<Product> list() {
+        return PRODUCTS;
+    }
+}
