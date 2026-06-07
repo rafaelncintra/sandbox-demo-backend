@@ -2,6 +2,7 @@ package com.demo;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -20,7 +21,9 @@ public class ProductController {
     );
 
     @GetMapping
-    public List<Product> list() {
-        return PRODUCTS;
+    public List<Product> list(@RequestParam Optional<String> category) {
+        return category
+            .map(c -> PRODUCTS.stream().filter(p -> p.category().equalsIgnoreCase(c)).toList())
+            .orElse(PRODUCTS);
     }
 }
